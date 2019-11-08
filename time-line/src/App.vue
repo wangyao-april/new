@@ -22,4 +22,11 @@ html,body{
   list-style: none;
   outline: none;
 }
+.scale-enter{
+  transform: translateX(100%);
+  opacity: 0;
+}
+.scale-enter-active,.scale-leave-active{
+  transition: all .5s ease;
+}
 </style>

@@ -29,12 +29,14 @@ export default {
             console.log('result...', result);
             if (result && result.data.code === 1){
                 // 登陆完成，执行后续跳转逻辑
+                window.sessionStorage.setItem('isLogin','true');
+                this.$router.replace('/');
             }
-            alert(result.data.msg);
+            this.$toast(result.data.msg);
         },
         checkUserName(){
             if (!/\w{3, 20}/.test(this.userName)){
-                alert('请输入正确的用户名')
+                this.$toast('请输入正确的用户名')
             }
         }
     }

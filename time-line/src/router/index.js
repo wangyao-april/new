@@ -1,7 +1,9 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-
+import Nprogress from 'nprogress'
+import 'nprogress/nprogress.css'
 import Home from '../views/home/index.vue'
+
 
 import Timeline from '../views/home/timeline'
 import My from '../views/home/my'
@@ -17,6 +19,10 @@ const routes = [
   {
     path: '/login', // 登陆页面
     component:()=>import('../views/login/login.vue')
+  },
+  {
+    path:'/post',
+    component:()=>import('../views/post.vue')
   },
   {
     path: '/register',  // 注册页面
@@ -56,20 +62,40 @@ const routes = [
       component: null
     }]
   },
-  {
-    path: '/about',
-    name: 'about',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
-  }
+  // {
+  //   path: '/about',
+  //   name: 'about',
+  //   // route level code-splitting
+  //   // this generates a separate chunk (about.[hash].js) for this route
+  //   // which is lazy-loaded when the route is visited.
+  //   component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
+  // }
 ]
 
 const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
   routes
+})
+
+const whiteList=['/login','/register']
+router.beforeEach((to,from,next)=>{
+  Nprogress.start();
+  let isLogin =window.sessionStorage.getItem('isLogin');
+  if(!isLogin){
+    if(whiteList.indexOf(to.path)===-1){
+      Nprogress.done();
+      next('/login');
+    }else{
+      next();
+    }
+  }else{
+    next();
+  }
+})
+
+router.afterEach((to,from)=>{
+  Nprogress.done()
 })
 
 export default router

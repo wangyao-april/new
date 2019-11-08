@@ -4,20 +4,37 @@
             圈子登录
         </div>
         <div class="ipt">
-            <input type="text" placeholder="用户名">
-            <input type="text" placeholder="登录密码">
-            <button>登录</button>
+            <input type="text" placeholder="用户名" v-model="userName" @blur="checkUserName">
+            <input type="password" placeholder="登录密码" v-model="userPwd">
+            <button @click="login">登录</button>
         </div>
         <router-link to="/register">没有账号,快速注册</router-link>
     </div>
 </template>
 
 <script>
-
+import {login} from '@/service/index'
 export default {
     data(){
         return {
-
+            userName:'',
+            userPwd:''
+        }
+    },
+    methods:{
+        async login(){
+            let {userName,userPwd}=this;
+            let result=await login({userName,userPwd});
+            if(result && result.data.code===1){
+                window.sessionStorage.setItem('isLogin','true');
+                this.$router.replace('/');
+            }
+            this.$toast(result.data.msg);
+        },
+        checkUserName(){
+            if(!/\w{3,20}/.test(this.userName)){
+                this.$toast('请输入正确的用户名')
+            }
         }
     }
 }
