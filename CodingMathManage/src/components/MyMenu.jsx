@@ -28,11 +28,11 @@ function createMenu(ary){
 
 class MyMenu extends React.Component{
   render(){
-    let {path}=this.props.match;
+    let {pathname}=this.props.location;
     return <Menu
       onClick={this.handleClick}
-      defaultSelectedKeys={[path]}
-      defaultOpenKeys={[routes.routes[0].title]}
+      defaultSelectedKeys={[pathname]}
+      defaultOpenKeys={[routes.pages[0].title]}
       mode="inline"
     >{createMenu(routes.routes)}</Menu>
   }
