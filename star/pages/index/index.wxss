@@ -1,0 +1,39 @@
+.favor image{
+  width:100rpx;
+  height:100rpx;
+  border-radius: 50%;
+  position: absolute;
+  right:20px;
+  margin-top:20px;
+}
+.navlist{
+  margin-top:80px;
+}
+.list{
+  display:flex;
+  align-items: center;
+  flex-shrink: 0;
+  flex-wrap:wrap;
+}
+.item{
+  width:47vw;
+  margin:0 0 30rpx 2%;
+  text-align: center;
+}
+.item image{
+  width:100%;
+  margin-top:5px;
+}
+.history{
+  width:100%;
+  text-align: center;
+}
+.history image{
+  width:100rpx;
+  height:100rpx;
+  border-radius: 50%;
+}
+.buy{
+  width:100%;
+  text-align: center;
+}
